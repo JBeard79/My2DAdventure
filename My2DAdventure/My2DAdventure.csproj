@@ -8,7 +8,122 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Raylib-cs" Version="7.0.0" />
+        <PackageReference Include="Raylib-cs" Version="7.0.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="Assets\maps\interior01.txt" />
+        <Content Include="Assets\maps\interior01.txt">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\maps\world01.txt" />
+        <Content Include="Assets\maps\world01.txt">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\maps\worldV2.txt" />
+        <Content Include="Assets\maps\worldV2.txt">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\maps\worldV3.txt" />
+        <Content Include="Assets\maps\worldV3.txt">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\blocked.wav" />
+        <Content Include="Assets\sounds\blocked.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\BlueBoyAdventure.mp3" />
+        <Content Include="Assets\sounds\BlueBoyAdventure.mp3">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\burning.wav" />
+        <Content Include="Assets\sounds\burning.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\chipwall.wav" />
+        <Content Include="Assets\sounds\chipwall.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\coin.wav" />
+        <Content Include="Assets\sounds\coin.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\cursor.wav" />
+        <Content Include="Assets\sounds\cursor.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\cuttree.wav" />
+        <Content Include="Assets\sounds\cuttree.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\dooropen.wav" />
+        <Content Include="Assets\sounds\dooropen.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\Dungeon.wav" />
+        <Content Include="Assets\sounds\Dungeon.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\fanfare.wav" />
+        <Content Include="Assets\sounds\fanfare.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\FinalBattle.wav" />
+        <Content Include="Assets\sounds\FinalBattle.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\gameover.wav" />
+        <Content Include="Assets\sounds\gameover.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\hitmonster.wav" />
+        <Content Include="Assets\sounds\hitmonster.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\levelup.wav" />
+        <Content Include="Assets\sounds\levelup.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\Merchant.wav" />
+        <Content Include="Assets\sounds\Merchant.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\parry.wav" />
+        <Content Include="Assets\sounds\parry.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\powerup.wav" />
+        <Content Include="Assets\sounds\powerup.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\receivedamage.wav" />
+        <Content Include="Assets\sounds\receivedamage.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\sleep.wav" />
+        <Content Include="Assets\sounds\sleep.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\speak.wav" />
+        <Content Include="Assets\sounds\speak.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\stairs.wav" />
+        <Content Include="Assets\sounds\stairs.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\sounds\unlock.wav" />
+        <Content Include="Assets\sounds\unlock.wav">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\assets.txt" />
+        <Content Include="Assets\assets.txt">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Assets\textures.png" />
+        <Content Include="Assets\textures.png">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
 </Project>
