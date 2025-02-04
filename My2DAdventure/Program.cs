@@ -7,17 +7,15 @@ internal static class Program
 {
     private const string Title = "My2DAdventure - Raylib";
     private const int TileSize = 48;
-    private const int MaxScreenCol = 16;
-    private const int MaxScreenRow = 12;
-    private const int ScreenWidth = MaxScreenCol * TileSize;
-    private const int ScreenHeight = MaxScreenRow * TileSize;
-    private const int MaxWorldCol = 50;
-    private const int MaxWorldRow = 50;
+    private const int DefaultScreenWidth = 1024;
+    private const int DefaultScreenHeight = 768;
+    private const int MaxMapCol = 50;
+    private const int MaxMapRow = 50;
     private const int TargetFps = 60;
 
     public static void Main()
     {
-        Raylib.InitWindow(ScreenWidth, ScreenHeight, Title);
+        Raylib.InitWindow(DefaultScreenWidth, DefaultScreenHeight, Title);
         Raylib.SetTargetFPS(TargetFps);
         Raylib.SetConfigFlags(ConfigFlags.VSyncHint | ConfigFlags.Msaa4xHint | ConfigFlags.HighDpiWindow);
         Raylib.SetExitKey(KeyboardKey.Null);
@@ -28,12 +26,10 @@ internal static class Program
             CameraOrigin = new Vector2((float)Raylib.GetScreenWidth() / 2 - 24,
                 (float)Raylib.GetScreenHeight() / 2 - 24),
             TileSize = TileSize,
-            MaxScreenCol = MaxScreenCol,
-            MaxScreenRow = MaxScreenRow,
-            ScreenWidth = ScreenWidth,
-            ScreenHeight = ScreenHeight,
-            MaxWorldCol = MaxWorldCol,
-            MaxWorldRow = MaxWorldRow
+            DefaultScreenWidth = DefaultScreenWidth,
+            DefaultScreenHeight = DefaultScreenHeight,
+            MaxMapCol = MaxMapCol,
+            MaxMapRow = MaxMapRow
         });
 
         while (!Raylib.WindowShouldClose() && game.GameState != GameState.Quit)
@@ -79,12 +75,18 @@ internal static class Program
                     game.TitleScreen.Draw();
                     break;
                 case GameState.GameOn:
-                    Raylib.ClearBackground(Color.Pink);
+                    Raylib.ClearBackground(Color.Black);
+                    game.Draw2DCore();
                     break;
                 case GameState.DialogWindow:
+                    Raylib.ClearBackground(Color.Black);
+                    game.Draw2DCore();
+                    Console.WriteLine("Dialog");
                     break;
                 case GameState.Pause:
-                    Raylib.ClearBackground(Color.Red);
+                    Raylib.ClearBackground(Color.Black);
+                    game.Draw2DCore();
+                    Console.WriteLine("Pause");
                     break;
                 case GameState.Quit:
                     break;
@@ -96,18 +98,7 @@ internal static class Program
             Raylib.EndDrawing();
         }
 
-
-        UnloadGame(game);
-
+        game.UnloadGame();
         Raylib.CloseWindow();
-    }
-
-    private static void UnloadGame(Game game)
-    {
-        Raylib.UnloadTexture(game.Textures);
-        foreach (var music in game.Music) Raylib.UnloadMusicStream(music);
-
-        foreach (var sound in game.SoundEffects) Raylib.UnloadSound(sound);
-        Raylib.CloseAudioDevice();
     }
 }

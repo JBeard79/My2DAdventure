@@ -1,4 +1,6 @@
 using My2DAdventure.UI.Screens;
+using My2DAdventure.World;
+using My2DAdventure.World.Maps;
 using Raylib_cs;
 
 namespace My2DAdventure;
@@ -13,18 +15,26 @@ public enum GameState
     Quit
 }
 
-public class Game(Config config)
+public class Game
 {
-    private readonly Config _config = config;
+    private readonly Config _config;
+    private readonly Map _map;
+    private readonly Texture2D _textures = Raylib.LoadTexture("textures.png");
     public readonly LogoScreen LogoScreen = new();
-    public readonly Texture2D Textures = Raylib.LoadTexture("textures.png");
     public readonly TitleScreen TitleScreen = new();
-    public List<Music> Music { get; } = [Raylib.LoadMusicStream("BlueBoyAdventure.mp3")];
 
-    public List<Sound> SoundEffects { get; } =
+    public Game(Config config)
+    {
+        _config = config;
+        _map = new OverWorld(_textures, _config.MaxMapCol, _config.MaxMapRow, config.TileSize, "worldV2.txt");
+    }
+
+    private List<Music> Music { get; } = [Raylib.LoadMusicStream("BlueBoyAdventure.mp3")];
+
+    private List<Sound> SoundEffects { get; } =
     [
-        Raylib.LoadSound("coin.wav"), Raylib.LoadSound("dooropen.wav"),
-        Raylib.LoadSound("powerup.wav"), Raylib.LoadSound("fanfare.wav")
+        Raylib.LoadSound("coin.wav"), Raylib.LoadSound("dooropen.wav"), Raylib.LoadSound("powerup.wav"),
+        Raylib.LoadSound("fanfare.wav")
     ];
 
     public GameState GameState { get; private set; } = GameState.TitleScreen;
@@ -60,6 +70,14 @@ public class Game(Config config)
     {
         Raylib.ClearBackground(Color.White);
 
-        Raylib.DrawText("Hello, world!", 12, 12, 20, Color.Black);
+        _map.Draw();
+    }
+
+    public void UnloadGame()
+    {
+        foreach (var music in Music) Raylib.UnloadMusicStream(music);
+        foreach (var sound in SoundEffects) Raylib.UnloadSound(sound);
+        Raylib.UnloadTexture(_textures);
+        Raylib.CloseAudioDevice();
     }
 }
