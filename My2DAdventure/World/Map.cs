@@ -6,9 +6,12 @@ namespace My2DAdventure.World;
 
 public abstract class Map(Texture2D textures, int mapMaxCol, int mapMaxRow, int tileSize, string mapName)
 {
-    private Tile[,] TileMap { get; } = LoadTileMap(mapMaxCol, mapMaxRow, mapName);
+    public Tile[,] TileMap { get; } = LoadTileMap(mapMaxCol, mapMaxRow, mapName);
 
     public abstract Event[]? EventTiles { get; init; }
+
+    public static List<int> CollisionTiles { get; } =
+        [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 40, 41];
 
     private Rectangle[] SrcRects { get; } =
     {
@@ -66,12 +69,12 @@ public abstract class Map(Texture2D textures, int mapMaxCol, int mapMaxRow, int 
             foreach (var col in row.Trim().Split(' '))
             {
                 var tileNum = int.Parse(col);
-                map[i, j] = tileNum switch
-                {
-                    12 or 13 or 14 or 15 or 16 or 17 or 18 or 19 or 20 or 21 or 22 or 23 or 24 or 25 or 40 or 41 =>
-                        new Tile(tileNum, true),
-                    _ => new Tile(tileNum, false)
-                };
+
+                if (CollisionTiles.Contains(tileNum))
+                    map[i, j] = new Tile(tileNum, true);
+                else
+                    map[i, j] = new Tile(tileNum, false);
+
                 j++;
             }
 
@@ -82,17 +85,24 @@ public abstract class Map(Texture2D textures, int mapMaxCol, int mapMaxRow, int 
         return map;
     }
 
-    public void Draw()
+    public void Draw(Camera2D camera)
     {
-        for (var row = 0; row < mapMaxRow; row++)
+        var cameraStart = Raylib.GetScreenToWorld2D(new Vector2(), camera);
+        var cameraEnd =
+            Raylib.GetScreenToWorld2D(new Vector2(Raylib.GetScreenWidth(), Raylib.GetScreenHeight()), camera);
+
+        for (var row = (int)cameraStart.Y / tileSize; row < (int)cameraEnd.Y / tileSize + 1; row++)
         {
-            for (var col = 0; col < mapMaxCol; col++)
+            for (var col = (int)cameraStart.X / tileSize; col < (int)cameraEnd.X / tileSize + 1; col++)
             {
+                // Figure out how to get mapMaxCol/Row to work here.  Only works with const.
+                if (row is < 0 or >= 50 || col is < 0 or >= 50)
+                    continue;
+
                 var tilePosition = new Vector2(col * tileSize, row * tileSize);
                 var destRect = new Rectangle(tilePosition.X, tilePosition.Y, tileSize, tileSize);
                 var tileNum = TileMap[row, col].TileNumber;
-                Raylib.DrawTexturePro(textures, SrcRects[tileNum], destRect, new Vector2(),
-                    0, Color.White);
+                Raylib.DrawTexturePro(textures, SrcRects[tileNum], destRect, new Vector2(), 0, Color.White);
             }
         }
     }

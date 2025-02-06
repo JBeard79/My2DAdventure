@@ -44,9 +44,13 @@ internal static class Program
                 case GameState.TitleScreen:
                     game.CheckState();
                     game.TitleScreen.Update();
+                    game.Player.UpdateAvatar();
                     break;
                 case GameState.GameOn:
                     game.CheckState();
+                    game.Camera = game.Camera with { Target = game.Player.WorldPosition };
+                    game.Player.Update();
+                    game.CheckTileCollision(game.Player);
                     break;
                 case GameState.DialogWindow:
                     game.CheckState();
@@ -73,6 +77,7 @@ internal static class Program
                 case GameState.TitleScreen:
                     Raylib.ClearBackground(Color.Black);
                     game.TitleScreen.Draw();
+                    game.Player.DrawAvatar();
                     break;
                 case GameState.GameOn:
                     Raylib.ClearBackground(Color.Black);

@@ -30,11 +30,11 @@ public class TitleScreen
         if (Raylib.IsKeyPressed(KeyboardKey.Enter) || Raylib.IsKeyPressed(KeyboardKey.KpEnter)) IsDone = true;
     }
 
-    private void DrawCaret(int screenHeight)
+    private void DrawCaret(int screenWidth, int screenHeight)
     {
         const int fontSize = 30;
-        const int posX = 250;
-        var defaultYPos = screenHeight - screenHeight / 3 + fontSize / 2;
+        var posX = screenWidth / 2 - 200;
+        var defaultYPos = screenHeight - 190;
         const string caret = "->";
         switch (CaretPosition)
         {
@@ -73,13 +73,14 @@ public class TitleScreen
     private void DrawTitleMenu(int screenWidth, int screenHeight)
     {
         var screenMiddle = screenWidth / 2;
-        var defaultYPos = screenHeight - screenHeight / 3;
+        var defaultYPos = screenHeight - 200;
+        var fontSize = 50;
 
         for (int i = 0, padding = 0; i < 3; i++, padding += 50)
         {
-            var menuItemSize = Raylib.MeasureTextEx(Raylib.GetFontDefault(), MenuLabels[i], 50, 1);
+            var menuItemSize = Raylib.MeasureTextEx(Raylib.GetFontDefault(), MenuLabels[i], fontSize, 1);
             var labelLocation = new Vector2(screenMiddle - menuItemSize.X / 2, defaultYPos + padding);
-            Raylib.DrawTextEx(Raylib.GetFontDefault(), MenuLabels[i], labelLocation, 50, 1, Color.White);
+            Raylib.DrawTextEx(Raylib.GetFontDefault(), MenuLabels[i], labelLocation, fontSize, 1, Color.White);
         }
     }
 
@@ -90,6 +91,6 @@ public class TitleScreen
         DrawTitleMenu(screenWidth, screenHeight);
         DrawTitleText(screenWidth, screenHeight);
         DrawBorder(screenWidth, screenHeight);
-        DrawCaret(screenHeight);
+        DrawCaret(screenWidth, screenHeight);
     }
 }
